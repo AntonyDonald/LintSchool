@@ -17,6 +17,10 @@ const Login = () => {
 
   const dispatch = useDispatch();
 
+  const reducer = useSelector((state) => state)
+  const { userData, snackBar } = reducer;
+  console.log('userres', userData, snackBar);
+
   const [loginData, setLoginData] = useState({
     username: "",
     password: ''
@@ -30,6 +34,7 @@ const Login = () => {
   }
 
   const handleLogin = async () => {
+    console.log('login presses');
     if (loginData?.username === '' || loginData?.password === "") {
       dispatch({
         type: reduxHelper.UPDATE_SNACKBAR,
@@ -59,18 +64,15 @@ const Login = () => {
   }
   return (
     <Root>
-      <DetailHeader></DetailHeader>
-      <SnackBar />
-      <View style={{ alignItems: 'center', }}>
-        <FastImage
-          style={styles.image}
-          source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGUhk6Dil1ODpzFpFzSCAdTfEIgECVsOoPQBhmWzTw4aATsiE_dpMm9Rwyj7rdGyUuhZU&usqp=CAU' }}
-          resizeMode='contain'
-        />
-      </View>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <DetailHeader></DetailHeader>
+        <View style={{ alignItems: 'center', }}>
+          <FastImage
+            style={styles.image}
+            source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGUhk6Dil1ODpzFpFzSCAdTfEIgECVsOoPQBhmWzTw4aATsiE_dpMm9Rwyj7rdGyUuhZU&usqp=CAU' }}
+            resizeMode='contain'
+          />
+        </View>
         <View style={styles.username}>
           <TextInput
             label={'username'}

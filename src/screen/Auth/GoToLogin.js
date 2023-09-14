@@ -40,6 +40,17 @@ const GoToLogin = () => {
             type: reduxHelper.UPDATE_NAVIGATION,
             payload: navigation
         })
+        dispatch({
+            type: reduxHelper.UPDATE_USER_DATA,
+            payload: 'tuiututu'
+        })
+        dispatch({
+            type: reduxHelper.UPDATE_SNACKBAR,
+            payload: {
+                visible: true,
+                message: 'just for testing'
+            }
+        })
     }, [])
     return (
         <Root>

@@ -28,6 +28,7 @@ const reducer = (state = initialState, action) => {
                 headers: payload
             }
         case reduxHelper.UPDATE_SNACKBAR:
+            console.log("SB Payload = ",payload);
             return {
                 ...state,
                 snackBar: payload
@@ -38,7 +39,7 @@ const reducer = (state = initialState, action) => {
                 navigation: payload
             }
         default:
-            break;
+            return state
     }
 
 

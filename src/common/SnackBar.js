@@ -12,12 +12,14 @@ const SnackBar = () => {
     const dispatch = useDispatch();
     const reducer = useSelector((state) => state)
     const { snackBar } = reducer;
+    console.log("Snack bar === ",snackBar);
     const handleDismiss = () => {
         dispatch({
             type: reduxHelper.UPDATE_SNACKBAR,
             payload: {
-                ...snackBar,
-                visible: false
+                // ...snackBar,
+                visible: false,
+                message: ''
             }
         })
     }
@@ -39,7 +41,7 @@ const SnackBar = () => {
         //     top: 0.06 * screenHeight
         // }}
         >
-            <Text>{snackBar.message || ''}</Text>
+            <Text>{snackBar?.message || 'Something went wrong...'}</Text>
         </Snackbar>
     )
 }
