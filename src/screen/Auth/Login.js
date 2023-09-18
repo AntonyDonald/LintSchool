@@ -11,9 +11,16 @@ import { useLogin } from '../../hooks/useLogin';
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
-import SnackBar from '../../common/SnackBar'
+// import { useCamera } from 'react-native-camera-hooks'
+// import { RNCamera } from 'react-native-camera';
+// import RNFS from 'react-native-fs'
 
 const Login = () => {
+
+  // const [{ cameraRef }, { takePicture }] = useCamera();
+
+  // const [openCamera, setOpenCamera] = useState(false);
+  // const [cameraPosition, setCameraPosition] = useState(false)
 
   const dispatch = useDispatch();
 
@@ -62,6 +69,37 @@ const Login = () => {
     const result = await useLogin(loginData)
     console.log('result', result?.data);
   }
+
+  // const handleCapture = async () => {
+  //   try {
+  //     const data = await takePicture()
+  //     console.log('datat', data);
+  //     const filePath = data?.uri
+  //     const newFilePath = RNFS.ExternalDirectoryPath + '/MyTest.jpg';
+  //     RNFS.moveFile(filePath, newFilePath)
+  //       .then(() => {
+  //         console.log('image Moved', filePath, 'to', newFilePath);
+  //       })
+  //       .catch((error) => {
+  //         console.log('file move Error', error);
+  //       })
+  //   } catch (error) {
+  //     console.log('capture Error', error);
+  //   }
+  // }
+
+  // if (openCamera === true) {
+  //   return (
+  //     <RNCamera
+  //       ref={cameraRef}
+  //       type={cameraPosition ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
+  //       style={styles.preview}
+  //     >
+  //       <Button onPress={handleCapture}>Capture</Button>
+  //       <Button onPress={() => setOpenCamera(false)}>Back</Button>
+  //     </RNCamera>
+  //   )
+  // }
   return (
     <Root>
       <ScrollView showsVerticalScrollIndicator={false}>
@@ -100,6 +138,7 @@ const Login = () => {
           </View>
         </View>
       </ScrollView>
+      {/* <Button onPress={() => setOpenCamera(true)}>Open Camera</Button> */}
     </Root>
   )
 }
@@ -130,6 +169,11 @@ const styles = StyleSheet.create({
   image: {
     width: screenWidth,
     height: screenHeight * 0.2,
+  },
+  preview: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 
 })

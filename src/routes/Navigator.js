@@ -6,6 +6,8 @@ import Login from '../screen/Auth/Login';
 import linking from './linking';
 import GoToLogin from '../screen/Auth/GoToLogin';
 import HomeDrawerNavigator from './HomeDrawerNavigator';
+import HomeBottomNav from './HomeBottomNav';
+import Camera from '../screen/camera/Camera';
 
 const Stack = createStackNavigator()
 
@@ -23,15 +25,16 @@ function AuthNav() {
 function HomeNav() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}>
-            <Stack.Screen name='Home' component={HomeDrawerNavigator} />
+            <Stack.Screen name='Home' component={HomeBottomNav} />
+            <Stack.Screen name='openCamera' component={Camera} />
         </Stack.Navigator>
     )
 }
 const Navigator = () => {
     return (
         <NavigationContainer linking={linking}>
-            <AuthNav />
-            {/* <HomeNav /> */}
+            {/* <AuthNav /> */}
+            <HomeNav />
         </NavigationContainer>
     )
 }
