@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, View } from 'react-native'
+import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { usePageJson } from '../../hooks/appDataHooks/usePageJson'
 import Root from '../../common/Root'
@@ -8,11 +8,14 @@ import { useNavigation } from '@react-navigation/native'
 import DeviceInfo from 'react-native-device-info'
 import { screenHeight, screenWidth } from '../../config/Dimension'
 import { GREY } from '../../theme/MainColor'
+import { useDispatch } from 'react-redux'
+import { reduxHelper } from '../../redux/ReduxHelper'
 
 
 const Home = () => {
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const dispatch = useDispatch()
 
     // const [jsonData, setJsonData] = useState({})
 
@@ -25,12 +28,20 @@ const Home = () => {
     //     getPageJson()
     // }, [])
     const [batteryPercentage, setBatteryPercentage] = useState(0)
-    useEffect(async () => {
+    useEffect(() => {
+        test()
+    }, [])
+    const test = async () => {
         const getBattery = await DeviceInfo.getBatteryLevel()
         const percentage = getBattery * 100
         setBatteryPercentage(percentage)
-        console.log('getbattery', (getBattery * 100), '%');
-    }, [])
+    }
+    const handleLogout = () => {
+        dispatch({
+            type: reduxHelper.UPDATE_USER_DATA,
+            payload: null
+        })
+    }
     return (
         <Root>
             <View style={styles.container}>
@@ -43,6 +54,12 @@ const Home = () => {
                     </TouchableRipple>
                     <Text variant='bodyLarge'>Open Camera</Text>
                 </View>
+            </View>
+            <View>
+                <TouchableOpacity>
+                    <Button onPress={handleLogout}>Logout</Button>
+
+                </TouchableOpacity>
             </View>
             {/* <FlatList
                 data={jsonData?.components}

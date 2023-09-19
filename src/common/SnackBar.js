@@ -12,7 +12,6 @@ const SnackBar = () => {
     const dispatch = useDispatch();
     const reducer = useSelector((state) => state)
     const { snackBar } = reducer;
-    console.log("Snack bar === ",snackBar);
     const handleDismiss = () => {
         dispatch({
             type: reduxHelper.UPDATE_SNACKBAR,

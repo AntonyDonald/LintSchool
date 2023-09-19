@@ -30,6 +30,24 @@ const HomeBottomNav = () => {
 
                 }}
             />
+            <Tab.Screen
+                name={'Details'}
+                component={Home}
+                options={{
+                    tabBarIcon: ({ focused, color }) => <FastImage source={{ uri: 'https://www.linkpicture.com/q/me_16.png' }} style={{ height: ICON, width: ICON, top: screenHeight * 0 }} />,
+
+
+                }}
+            />
+            <Tab.Screen
+                name={'Holidays'}
+                component={Home}
+                options={{
+                    tabBarIcon: ({ focused, color }) => <FastImage source={{ uri: 'https://www.linkpicture.com/q/me_16.png' }} style={{ height: ICON, width: ICON, top: screenHeight * 0 }} />,
+
+
+                }}
+            />
 
             <Tab.Screen
                 name={'Myself'}

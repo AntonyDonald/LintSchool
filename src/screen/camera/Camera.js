@@ -24,7 +24,7 @@ const Camera = () => {
             RNFS.moveFile(filePath, newFilePath)
                 .then(() => {
                     console.log('image Moved', filePath, 'to', newFilePath);
-                    setShowImage(tre)
+                    // setShowImage(true)
                 })
                 .catch((error) => {
                     console.log('file move Error', error);

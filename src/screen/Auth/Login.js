@@ -17,22 +17,23 @@ import { reduxHelper } from '../../redux/ReduxHelper'
 
 const Login = () => {
 
-  // const [{ cameraRef }, { takePicture }] = useCamera();
-
-  // const [openCamera, setOpenCamera] = useState(false);
-  // const [cameraPosition, setCameraPosition] = useState(false)
-
   const dispatch = useDispatch();
 
   const reducer = useSelector((state) => state)
   const { userData, snackBar } = reducer;
-  console.log('userres', userData, snackBar);
 
   const [loginData, setLoginData] = useState({
     username: "",
     password: ''
   })
 
+  const data = [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin"
+    }
+  ]
   const onchangeValue = (text, label) => {
     setLoginData((oldData) => ({
       ...oldData,
@@ -41,7 +42,7 @@ const Login = () => {
   }
 
   const handleLogin = async () => {
-    console.log('login presses');
+
     if (loginData?.username === '' || loginData?.password === "") {
       dispatch({
         type: reduxHelper.UPDATE_SNACKBAR,
@@ -62,44 +63,28 @@ const Login = () => {
       })
       return
     }
+    if (data[0]?.username !== loginData?.username || data[0].password !== loginData?.password) {
+      dispatch({
+        type: reduxHelper.UPDATE_SNACKBAR,
+        payload: {
+          visible: true,
+          message: 'You are not an User'
+        }
+      })
+      return
+    }
+    dispatch({
+      type: reduxHelper.UPDATE_USER_DATA,
+      payload: 'Success'
+    })
     setLoginData({
       username: "",
       password: ""
     })
-    const result = await useLogin(loginData)
-    console.log('result', result?.data);
+    // const result = await useLogin(loginData)
+    // console.log('result', result?.data);
   }
 
-  // const handleCapture = async () => {
-  //   try {
-  //     const data = await takePicture()
-  //     console.log('datat', data);
-  //     const filePath = data?.uri
-  //     const newFilePath = RNFS.ExternalDirectoryPath + '/MyTest.jpg';
-  //     RNFS.moveFile(filePath, newFilePath)
-  //       .then(() => {
-  //         console.log('image Moved', filePath, 'to', newFilePath);
-  //       })
-  //       .catch((error) => {
-  //         console.log('file move Error', error);
-  //       })
-  //   } catch (error) {
-  //     console.log('capture Error', error);
-  //   }
-  // }
-
-  // if (openCamera === true) {
-  //   return (
-  //     <RNCamera
-  //       ref={cameraRef}
-  //       type={cameraPosition ? RNCamera.Constants.Type.front : RNCamera.Constants.Type.back}
-  //       style={styles.preview}
-  //     >
-  //       <Button onPress={handleCapture}>Capture</Button>
-  //       <Button onPress={() => setOpenCamera(false)}>Back</Button>
-  //     </RNCamera>
-  //   )
-  // }
   return (
     <Root>
       <ScrollView showsVerticalScrollIndicator={false}>

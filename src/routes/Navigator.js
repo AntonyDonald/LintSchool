@@ -8,6 +8,7 @@ import GoToLogin from '../screen/Auth/GoToLogin';
 import HomeDrawerNavigator from './HomeDrawerNavigator';
 import HomeBottomNav from './HomeBottomNav';
 import Camera from '../screen/camera/Camera';
+import { useSelector } from 'react-redux';
 
 const Stack = createStackNavigator()
 
@@ -31,10 +32,13 @@ function HomeNav() {
     )
 }
 const Navigator = () => {
+    const reducer = useSelector((state) => state)
+    const { userData } = reducer
+    console.log('user', userData);
     return (
         <NavigationContainer linking={linking}>
-            {/* <AuthNav /> */}
-            <HomeNav />
+            {!!userData ? <HomeNav /> :
+                <AuthNav />}
         </NavigationContainer>
     )
 }
