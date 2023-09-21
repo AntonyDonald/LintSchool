@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { usePageJson } from '../../hooks/appDataHooks/usePageJson'
-import Root from '../../common/Root'
+import Root from '../../components/Root'
 import { AllComponents } from '../../config/AllComponents'
 import { Button, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native'

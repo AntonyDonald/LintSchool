@@ -1,45 +1,172 @@
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import React from 'react'
-import Root from '../../common/Root'
+import {
+    Animated,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    View,
+    Text
+} from 'react-native'
+import React, { Fragment, } from 'react'
 import FastImage from 'react-native-fast-image'
 import { screenHeight, screenWidth } from '../../config/Dimension'
-import { Text } from 'react-native-paper'
+import { } from 'react-native-paper'
+import { useRef } from 'react'
+import { COLORS, FONTS, IMAGES } from '../../components/theme'
+import LinearGradient from 'react-native-linear-gradient'
+import CustomButton from '../../components/CustomButton'
+import { useNavigation } from '@react-navigation/native'
 
 const OnBoarding = () => {
-    return (
-        <Root>
-            <View style={styles.text}>
-                <Text variant='headlineMedium' style={{ textAlign: 'center' }}>My Child's Diary</Text>
-                <Text variant='labelLarge' style={styles.lable}>Children are great imitators. So give them something great to imitate.</Text>
-            </View>
-            <View style={styles.OnBoarding}>
-                <FastImage
-                    style={{ height: screenHeight, width: screenWidth }}
-                    source={{ uri: 'https://static.vecteezy.com/system/resources/previews/002/896/415/original/books-illustration-cartoon-books-books-vector.jpg' }}
-                    resizeMode='center'
-                />
-            </View>
 
-        </Root>
+    const navigation = useNavigation()
+
+    const DATA = [
+        {
+            title: 'Let’s get started',
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        },
+        {
+            title: 'Let’s get started',
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        },
+        {
+            title: 'Let’s get started',
+            desc: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ',
+        },
+    ]
+
+    const scrollValue = useRef(new Animated.Value(0)).current;
+
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <LinearGradient
+                    style={{ flex: 1 }}
+                    colors={['#FFCD90', '#FE9063']}>
+                    <View style={{
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        height: screenHeight / 2.3,
+                    }}>
+                        <FastImage
+                            style={{
+                                width: 130,
+                                height: 130,
+
+                            }}
+                            source={IMAGES.onboarding}
+                            resizeMode='contain'
+                        />
+                        <FastImage
+                            style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                width: '100%',
+                                height: 80,
+                                tintColor: COLORS.backgroundColor,
+                            }}
+                            source={IMAGES.loginShape}
+                            resizeMode='stretch'
+                        />
+                    </View>
+                    <View style={{ backgroundColor: COLORS.backgroundColor, flex: 1 }}>
+                        <View style={{ flex: 1 }}>
+                            <ScrollView
+                                horizontal
+                                pagingEnabled
+                                scrollEventThrottle={16}
+                                decelerationRate="fast"
+                                showsHorizontalScrollIndicator={false}
+                                onScroll={Animated.event(
+                                    [{ nativeEvent: { contentOffset: { x: scrollValue } } }],
+                                    { useNativeDriver: false },
+                                )}>
+                                {DATA.map((data, index) => (
+
+                                    <View style={[styles.slideItem]} key={index}>
+                                        <Text style={[FONTS.h2, { textAlign: 'center', color: COLORS.title , fontWeight :'800' }]}>{data.title}</Text>
+                                        <Text style={[FONTS.font, { textAlign: 'center', color: COLORS.text , fontWeight :'600'}]}>{data.desc}</Text>
+                                    </View>
+
+                                ))}
+                            </ScrollView>
+                            <View style={styles.indicatorConatiner} pointerEvents="none">
+                                {DATA.map((x, i) => (
+                                    <Indicator i={i} key={i} scrollValue={scrollValue} />
+                                ))}
+                            </View>
+
+                        </View>
+                        <View style={styles.container}>
+                            <View style={{ paddingBottom: 15 }}>
+                                <CustomButton title={'SIGN IN'} onPress={() => navigation.navigate('Login')} />
+                            </View>
+                            <View style={{ alignItems: 'center', padding: 12 }}>
+                                <Text style={[FONTS.font, { color: COLORS.text }]}>Forgot your account?</Text>
+                            </View>
+                        </View>
+                    </View>
+                </LinearGradient>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 
-export default OnBoarding
+
+function Indicator({ i, scrollValue }) {
+    const translateX = scrollValue.interpolate({
+        inputRange: [-screenWidth + i * screenWidth, i * screenWidth, screenWidth + i * screenWidth],
+        outputRange: [-20, 0, 20],
+    });
+    return (
+        <View style={styles.indicator}>
+            <Animated.View
+                style={[styles.activeIndicator, { transform: [{ translateX }] }]}
+            />
+        </View>
+    );
+}
 
 const styles = StyleSheet.create({
-    OnBoarding: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+    container: {
+        padding: 15,
+        //maxWidth : 575,
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        //backgroundColor:'red',
+        width: '100%',
     },
-    text: {
-        position: 'absolute',
+    slideItem: {
+        width: screenWidth,
+        alignItems: 'center',
+        padding: 25,
+        paddingBottom: 50,
+    },
+    indicatorConatiner: {
         alignSelf: 'center',
-        top: screenHeight * 0.05
+        position: 'absolute',
+        bottom: 20,
+        flexDirection: 'row',
     },
-    lable: {
-        textAlign: 'auto',
-        fontSize: 15,
-        margin: screenWidth * 0.02
-    }
+    indicator: {
+        height: 10,
+        width: 10,
+        borderWidth: 1,
+        borderColor: 'transparent',
+        borderRadius: 5,
+        backgroundColor: '#C4C4C4',
+        marginHorizontal: 4,
+        overflow: 'hidden',
+    },
+    activeIndicator: {
+        height: '100%',
+        width: '100%',
+        backgroundColor: COLORS.primary,
+        borderRadius: 10,
+
+    },
 })
+export default OnBoarding
+
+

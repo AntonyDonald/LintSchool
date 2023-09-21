@@ -1,16 +1,23 @@
-import { Keyboard, ScrollView, StyleSheet, View } from 'react-native'
-import React, { memo, useEffect, useState } from 'react'
-import Root from '../../common/Root'
-import { Button, Text, TextInput, TouchableRipple } from 'react-native-paper'
-import { screenHeight, screenWidth } from '../../config/Dimension'
+import {
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  Text,
+  TextInput
+} from 'react-native'
+import React, { memo, useState } from 'react'
 import FastImage from 'react-native-fast-image'
-import { PRIMARY } from '../../theme/MainColor'
-import Header from '../../common/Header'
-import DetailHeader from '../../common/DetailHeader'
+import Header from '../../components/Header'
+import DetailHeader from '../../components/DetailHeader'
 import { useLogin } from '../../hooks/useLogin';
-import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
+import LinearGradient from 'react-native-linear-gradient'
+import { COLORS, IMAGES, SIZES, FONTS, ICONS } from '../../components/theme'
+import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
+import CustomButton from '../../components/CustomButton'
 // import { useCamera } from 'react-native-camera-hooks'
 // import { RNCamera } from 'react-native-camera';
 // import RNFS from 'react-native-fs'
@@ -86,8 +93,8 @@ const Login = () => {
   }
 
   return (
-    <Root>
-      <ScrollView showsVerticalScrollIndicator={false}>
+    <>
+      {/* <ScrollView showsVerticalScrollIndicator={false}>
         <DetailHeader></DetailHeader>
         <View style={{ alignItems: 'center', }}>
           <FastImage
@@ -122,43 +129,134 @@ const Login = () => {
             <Text variant='labelLarge' style={{ color: '#fff' }}>Login</Text>
           </View>
         </View>
-      </ScrollView>
-      {/* <Button onPress={() => setOpenCamera(true)}>Open Camera</Button> */}
-    </Root>
+      </ScrollView> */}
+      <SafeAreaView style={{ flex: 1 }}>
+
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <Header transparent leftIcon={'back'} />
+          <LinearGradient
+            style={{ flex: 1 }}
+            colors={['#FFCD90', '#FE9063']}>
+            <View style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              minHeight: 200,
+            }}>
+              <FastImage
+                style={{
+                  width: 100,
+                  height: 100,
+                  marginBottom: 40,
+                }}
+                source={IMAGES.onboarding}
+                resizeMode='contain'
+              />
+              <FastImage
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  width: '100%',
+                  height: 80,
+                  tintColor: COLORS.backgroundColor,
+                }}
+                source={IMAGES.loginShape}
+                resizeMode='stretch'
+              />
+            </View>
+            <View style={{ backgroundColor: COLORS.backgroundColor }}>
+              <View style={GlobalStyleSheet.container}>
+                <View style={{ marginBottom: 20 }}>
+                  <Text style={[FONTS.h2, { textAlign: 'center', color: COLORS.title }]}>Sign in</Text>
+                  <Text style={[FONTS.font, { textAlign: 'center', color: COLORS.text }]}>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor </Text>
+                </View>
+
+                <View style={{ marginBottom: 15 }}>
+                  <View style={styles.inputIcon}>
+                    {/* <SvgXml
+                      xml={ICONS.user}
+                    /> */}
+                  </View>
+                  <TextInput
+                  style={[styles.inputStyle, { borderColor: COLORS.borderColor, color: COLORS.title }]}
+                  // defaultValue="jackmadani"
+                  placeholder='Email'
+                  placeholderTextColor={COLORS.text}
+                  />
+                </View>
+                <View style={{ marginBottom: 15 }}>
+                  <View style={styles.inputIcon}>
+                    {/* <SvgXml
+                      xml={ICONS.lock}
+                    /> */}
+                  </View>
+                  <TextInput
+                    // secureTextEntry={passwordShow}
+                    style={[styles.inputStyle, { borderColor: COLORS.borderColor, color: COLORS.title }]}
+                    placeholder='Password'
+                    placeholderTextColor={COLORS.text}
+                  />
+                  <TouchableOpacity
+                    accessible={true}
+                    accessibilityLabel="Password"
+                    accessibilityHint="Password show and hidden"
+                    // onPress={() => handndleShowPassword()}
+                    style={styles.eyeIcon}>
+                    {/* <SvgXml
+                      xml={passwordShow ? ICONS.eyeClose : ICONS.eyeOpen}
+                    /> */}
+                  </TouchableOpacity>
+                </View>
+                <View style={{ alignItems: 'flex-end', marginBottom: 15 }}>
+                  <TouchableOpacity
+                    style={{ marginLeft: 5 }}
+                  >
+                    <Text style={[FONTS.fontLg, { color: COLORS.primary, textDecorationLine: 'underline' }]}>Forgot Password</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={{ paddingBottom: 10 }}>
+                  <CustomButton
+                    title="SIGN IN" />
+                </View>
+
+              </View>
+            </View>
+          </LinearGradient>
+        </ScrollView>
+      </SafeAreaView>
+    </>
   )
 }
 
 export default memo(Login)
 
 const styles = StyleSheet.create({
-  username: {
-    flex: 1,
+  inputStyle: {
+    ...FONTS.fontLg,
+    height: 50,
+    paddingLeft: 60,
+    borderWidth: 1,
+    borderRadius: SIZES.radius,
+  },
+  inputIcon: {
+    backgroundColor: COLORS.yellow,
+    height: 40,
+    width: 40,
+    borderRadius: 10,
+    position: 'absolute',
+    left: 5,
+    top: 5,
+    alignItems: 'center',
     justifyContent: 'center',
-    // alignItems: 'center',
-    marginTop: screenHeight * 0.05
   },
-  button: {
+  eyeIcon: {
+    position: 'absolute',
+    height: 50,
+    width: 50,
     alignItems: 'center',
-    marginTop: screenHeight * 0.01,
-    marginBottom: screenHeight * 0.02,
-    marginLeft: screenWidth * 0.25,
-    marginRight: screenWidth * 0.25,
-    backgroundColor: PRIMARY.main,
-    padding: 10,
-    borderRadius: screenWidth * 0.02
-  },
-  textInput: {
-    margin: screenWidth * 0.03,
-    borderRadius: screenWidth * 0.02
-  },
-  image: {
-    width: screenWidth,
-    height: screenHeight * 0.2,
-  },
-  preview: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    right: 0,
+    zIndex: 1,
+    top: 0,
   }
-
 })
