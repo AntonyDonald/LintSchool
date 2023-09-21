@@ -1,4 +1,4 @@
-import { FlatList, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { FlatList, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { usePageJson } from '../../hooks/appDataHooks/usePageJson'
 import Root from '../../components/Root'
@@ -10,6 +10,8 @@ import { screenHeight, screenWidth } from '../../config/Dimension'
 import { GREY } from '../../theme/MainColor'
 import { useDispatch } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
+import Header from '../../components/Header'
+import HomeHeader from '../../components/HomeHeader'
 
 
 const Home = () => {
@@ -44,7 +46,17 @@ const Home = () => {
     }
     return (
         <Root>
-            <View style={styles.container}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <HomeHeader title={'Home'} />
+                <View style={{
+                    flex: 1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <Text>Home</Text>
+                </View>
+            </SafeAreaView>
+            {/* <View style={styles.container}>
                 <View style={styles.cameraButton}>
                     <TouchableRipple
                         style={[StyleSheet.absoluteFill, { zIndex: 999 }]}
@@ -54,13 +66,13 @@ const Home = () => {
                     </TouchableRipple>
                     <Text variant='bodyLarge'>Open Camera</Text>
                 </View>
-            </View>
-            <View>
+            </View> */}
+            {/* <View>
                 <TouchableOpacity>
                     <Button onPress={handleLogout}>Logout</Button>
 
                 </TouchableOpacity>
-            </View>
+            </View> */}
             {/* <FlatList
                 data={jsonData?.components}
                 renderItem={({ item, index }) => {
@@ -70,8 +82,9 @@ const Home = () => {
             /> */}
 
 
-            <Text>{batteryPercentage}%</Text>
+            {/* <Text>{batteryPercentage}%</Text> */}
         </Root>
+
     )
 }
 

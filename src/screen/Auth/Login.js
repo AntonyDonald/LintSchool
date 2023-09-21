@@ -17,7 +17,8 @@ import { reduxHelper } from '../../redux/ReduxHelper'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, IMAGES, SIZES, FONTS, ICONS } from '../../components/theme'
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
-import CustomButton from '../../components/CustomButton'
+import CustomButton from '../../components/CustomButton';
+import { SvgXml } from 'react-native-svg'
 // import { useCamera } from 'react-native-camera-hooks'
 // import { RNCamera } from 'react-native-camera';
 // import RNFS from 'react-native-fs'
@@ -29,10 +30,17 @@ const Login = () => {
   const reducer = useSelector((state) => state)
   const { userData, snackBar } = reducer;
 
+  const [passwordShow, setPasswordShow] = useState(true);
   const [loginData, setLoginData] = useState({
     username: "",
     password: ''
   })
+
+  const handndleShowPassword = () => {
+    setPasswordShow(!passwordShow);
+  }
+
+
 
   const data = [
     {
@@ -94,44 +102,7 @@ const Login = () => {
 
   return (
     <>
-      {/* <ScrollView showsVerticalScrollIndicator={false}>
-        <DetailHeader></DetailHeader>
-        <View style={{ alignItems: 'center', }}>
-          <FastImage
-            style={styles.image}
-            source={{ uri: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGUhk6Dil1ODpzFpFzSCAdTfEIgECVsOoPQBhmWzTw4aATsiE_dpMm9Rwyj7rdGyUuhZU&usqp=CAU' }}
-            resizeMode='contain'
-          />
-        </View>
-        <View style={styles.username}>
-          <TextInput
-            label={'username'}
-            mode='outlined'
-            value={loginData.username}
-            onChangeText={(text) => onchangeValue(text, 'username')}
-            style={styles.textInput}
-          />
-          <TextInput
-            label={'password'}
-            mode='outlined'
-            value={loginData.password}
-            onChangeText={(text) => onchangeValue(text, 'password')}
-            style={styles.textInput}
-            secureTextEntry
-          />
-          <View style={styles.button}>
-            <TouchableRipple
-              style={[StyleSheet.absoluteFill, { zIndex: 999 }]}
-              onPress={() => handleLogin()}
-            >
-              <View />
-            </TouchableRipple>
-            <Text variant='labelLarge' style={{ color: '#fff' }}>Login</Text>
-          </View>
-        </View>
-      </ScrollView> */}
       <SafeAreaView style={{ flex: 1 }}>
-
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
           <Header transparent leftIcon={'back'} />
           <LinearGradient
@@ -173,38 +144,42 @@ const Login = () => {
 
                 <View style={{ marginBottom: 15 }}>
                   <View style={styles.inputIcon}>
-                    {/* <SvgXml
+                    <SvgXml
                       xml={ICONS.user}
-                    /> */}
+                    />
                   </View>
                   <TextInput
-                  style={[styles.inputStyle, { borderColor: COLORS.borderColor, color: COLORS.title }]}
-                  // defaultValue="jackmadani"
-                  placeholder='Email'
-                  placeholderTextColor={COLORS.text}
+                    style={[styles.inputStyle, { borderColor: COLORS.borderColor, color: COLORS.title }]}
+                    // defaultValue="jackmadani"
+                    value={loginData.username}
+                    onChangeText={(text) => onchangeValue(text, 'username')}
+                    placeholder='Email'
+                    placeholderTextColor={COLORS.text}
                   />
                 </View>
                 <View style={{ marginBottom: 15 }}>
                   <View style={styles.inputIcon}>
-                    {/* <SvgXml
+                    <SvgXml
                       xml={ICONS.lock}
-                    /> */}
+                    />
                   </View>
                   <TextInput
-                    // secureTextEntry={passwordShow}
+                    secureTextEntry={passwordShow}
                     style={[styles.inputStyle, { borderColor: COLORS.borderColor, color: COLORS.title }]}
                     placeholder='Password'
                     placeholderTextColor={COLORS.text}
+                    value={loginData.password}
+                    onChangeText={(text) => onchangeValue(text, 'password')}
                   />
                   <TouchableOpacity
                     accessible={true}
                     accessibilityLabel="Password"
                     accessibilityHint="Password show and hidden"
-                    // onPress={() => handndleShowPassword()}
+                    onPress={() => handndleShowPassword()}
                     style={styles.eyeIcon}>
-                    {/* <SvgXml
+                    <SvgXml
                       xml={passwordShow ? ICONS.eyeClose : ICONS.eyeOpen}
-                    /> */}
+                    />
                   </TouchableOpacity>
                 </View>
                 <View style={{ alignItems: 'flex-end', marginBottom: 15 }}>
@@ -216,7 +191,7 @@ const Login = () => {
                 </View>
                 <View style={{ paddingBottom: 10 }}>
                   <CustomButton
-                    title="SIGN IN" />
+                    title="SIGN IN" onPress={() => handleLogin()} />
                 </View>
 
               </View>

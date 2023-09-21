@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect } from 'react'
 import Navigator from '../routes/Navigator'
-import SnackBar from '../common/SnackBar'
+import SnackBar from '../components/SnackBar'
 // import DeviceInfo from 'react-native-device-info'
 
 const MainApp = () => {

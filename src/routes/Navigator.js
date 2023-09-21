@@ -8,6 +8,7 @@ import HomeBottomNav from './HomeBottomNav';
 import Camera from '../screen/camera/Camera';
 import { useSelector } from 'react-redux';
 import OnBoarding from '../screen/Auth/OnBoarding';
+import HomeDrawerNavigator from './HomeDrawerNavigator';
 
 const Stack = createStackNavigator()
 
@@ -25,7 +26,7 @@ function AuthNav() {
 function HomeNav() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}>
-            <Stack.Screen name='Home' component={HomeBottomNav} />
+            <Stack.Screen name='Home' component={HomeDrawerNavigator} />
             <Stack.Screen name='openCamera' component={Camera} />
         </Stack.Navigator>
     )
