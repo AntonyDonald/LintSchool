@@ -64,6 +64,10 @@ export const IMAGES = {
     like: require('../../assets/icons/like.png'),
     profile: require('../../assets/icons/profile.png'),
 
+    //flags
+
+    india: require('../../assets/flags/india.png')
+
 }
 
 

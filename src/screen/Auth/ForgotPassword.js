@@ -7,8 +7,18 @@ import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/theme'
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
 import CustomButton from '../../components/CustomButton'
 import { SvgXml } from 'react-native-svg'
+import SelectDropdown from 'react-native-select-dropdown'
+import { useNavigation, useTheme } from '@react-navigation/native'
 
 const ForgotPassword = () => {
+
+  const { colors } = useTheme();
+  const navigation = useNavigation();
+
+  const countriesWithFlags = [
+    { title: '+91', image: IMAGES.india },
+  ];
+
   return (
     <>
       <SafeAreaView style={{ flex: 1 }}>
@@ -52,7 +62,7 @@ const ForgotPassword = () => {
                 </View>
                 <View style={[styles.inputStyle, { borderColor: COLORS.borderColor }]}>
 
-                  {/* <View
+                  <View
                     style={{
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -76,12 +86,12 @@ const ForgotPassword = () => {
                               <View
                                 style={{
                                   borderWidth: 1,
-                                  borderColor: colors.borderColor,
+                                  borderColor: COLORS.borderColor,
                                   overflow: 'hidden',
                                   marginRight: 6,
                                 }}
                               >
-                                <Image
+                                <FastImage
                                   style={{
                                     width: 30,
                                     height: 20,
@@ -101,7 +111,7 @@ const ForgotPassword = () => {
                       }}
                       rowStyle={{
                         height: 40,
-                        borderBottomColor: colors.borderColor,
+                        borderBottomColor: COLORS.borderColor,
                       }}
                       renderCustomizedRowChild={(item, index) => {
                         return (
@@ -109,12 +119,12 @@ const ForgotPassword = () => {
                             <View
                               style={{
                                 borderWidth: 1,
-                                borderColor: colors.borderColor,
+                                borderColor: COLORS.borderColor,
                                 overflow: 'hidden',
                                 marginRight: 6,
                               }}
                             >
-                              <Image
+                              <FastImage
                                 style={{
                                   width: 30,
                                   height: 20,
@@ -122,12 +132,12 @@ const ForgotPassword = () => {
                                 source={item.image}
                               />
                             </View>
-                            <Text style={{ ...FONTS.fontLg, color: colors.title }}>{item.title}</Text>
+                            <Text style={{ ...FONTS.fontLg, color: COLORS.title }}>{item.title}</Text>
                           </View>
                         );
                       }}
                     />
-                  </View> */}
+                  </View>
 
                   <TextInput
                     style={{
@@ -143,7 +153,7 @@ const ForgotPassword = () => {
                 </View>
                 <View style={{ paddingBottom: 10, flexDirection: 'row' }}>
                   <TouchableOpacity
-                    // onPress={() => props.navigation.navigate('SignIn')}
+                    onPress={() => navigation?.goBack()}
                     style={{
                       backgroundColor: '#505050',
                       width: 50,
@@ -160,7 +170,7 @@ const ForgotPassword = () => {
                   </TouchableOpacity>
                   <View style={{ flex: 1 }}>
                     <CustomButton
-                      // onPress={() => props.navigation.navigate('EnterCode')}
+                      onPress={() => navigation.navigate('OTP')}
                       title="NEXT"
                     />
                   </View>
@@ -176,4 +186,16 @@ const ForgotPassword = () => {
 
 export default ForgotPassword
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+
+  inputStyle: {
+    height: 50,
+    padding: 5,
+    paddingHorizontal: 15,
+    borderWidth: 1,
+    borderRadius: SIZES.radius,
+    marginBottom: 15,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+})
