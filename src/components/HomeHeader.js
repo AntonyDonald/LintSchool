@@ -2,9 +2,9 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { useTheme } from '@react-navigation/native';
 import { Feather } from 'react-native-vector-icons';
-import { COLORS, IMAGES, FONTS } from './theme';
 import FastImage from 'react-native-fast-image';
 import { Divider } from 'react-native-paper';
+import { COLORS, IMAGES, FONTS } from './styles/theme';
 
 const HomeHeader = (props) => {
 

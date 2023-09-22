@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import { COLORS, SIZES, FONTS } from '../theme'
+import { COLORS, SIZES, FONTS } from '../styles/theme'
 
 const CustomButton = (props) => {
     return (

@@ -1,4 +1,5 @@
-import { COLORS  , FONTS} from "./theme";
+import { COLORS,  FONTS } from "./theme";
+
 
 export const GlobalStyleSheet = {
     container : {

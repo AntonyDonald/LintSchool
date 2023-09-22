@@ -2,7 +2,6 @@
 import { useTheme } from 'react-native-paper'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useNavigation } from '@react-navigation/native'
-import { COLORS, ICONS, IMAGES, SIZES } from '../components/theme';
 import { SvgXml } from 'react-native-svg'
 import { Platform, StyleSheet, TouchableOpacity, View } from 'react-native';
 import Home from '../screen/Dashboard/Home';
@@ -10,6 +9,7 @@ import Profile from '../screen/Dashboard/Profile';
 import Chat from '../screen/Dashboard/Chat';
 import Likes from '../screen/Dashboard/Likes';
 import FastImage from 'react-native-fast-image';
+import { COLORS, ICONS, IMAGES, SIZES  } from '../components/styles/theme';
 
 const Tab = createBottomTabNavigator();
 

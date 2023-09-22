@@ -51,22 +51,22 @@ export const ICONS = {
 
 export const IMAGES = {
     //Auth
-    onboarding: require('../../assets/onboarding/1.png'),
-    loginShape: require('../../assets/onboarding/2.png'),
+    onboarding: require('../../../assets/onboarding/1.png'),
+    loginShape: require('../../../assets/onboarding/2.png'),
 
     //Dashboard
 
-    home: require('../../assets/icons/home.png'),
-    plus: require('../../assets/icons/plus.png'),
-    search: require('../../assets/icons/search.png'),
-    chat: require('../../assets/icons/chat.png'),
-    setting: require('../../assets/icons/setting.png'),
-    like: require('../../assets/icons/like.png'),
-    profile: require('../../assets/icons/profile.png'),
+    home: require('../../../assets/icons/home.png'),
+    plus: require('../../../assets/icons/plus.png'),
+    search: require('../../../assets/icons/search.png'),
+    chat: require('../../../assets/icons/chat.png'),
+    setting: require('../../../assets/icons/setting.png'),
+    like: require('../../../assets/icons/like.png'),
+    profile: require('../../../assets/icons/profile.png'),
 
     //flags
 
-    india: require('../../assets/flags/india.png')
+    india: require('../../../assets/flags/india.png')
 
 }
 

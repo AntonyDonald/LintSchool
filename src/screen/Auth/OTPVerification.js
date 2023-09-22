@@ -5,10 +5,10 @@ import { useState } from 'react';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import FastImage from 'react-native-fast-image';
-import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/theme';
+import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/styles/theme';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { SvgXml } from 'react-native-svg';
-import { GlobalStyleSheet } from '../../components/GlobalStyleSheet';
+import { GlobalStyleSheet } from '../../components/styles/GlobalStyleSheet';
 import CustomButton from '../../components/CustomComponent/CustomButton';
 
 const OTPVerification = () => {
