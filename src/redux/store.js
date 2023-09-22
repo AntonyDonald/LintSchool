@@ -5,11 +5,6 @@ import { reduxHelper } from "./ReduxHelper";
 const initialState = {
     headers: {},
     userData: null,
-    snackBar: {
-        visible: false,
-        message: '',
-        bgColor : ''
-    },
     navigation: null,
 }
 
@@ -27,11 +22,6 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 headers: payload
-            }
-        case reduxHelper.UPDATE_SNACKBAR:
-            return {
-                ...state,
-                snackBar: payload
             }
         case reduxHelper.UPDATE_NAVIGATION:
             return {

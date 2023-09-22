@@ -20,6 +20,7 @@ import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
 import CustomButton from '../../components/CustomButton';
 import { SvgXml } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
+import { snackBar } from '../../components/SnackBar'
 // import { useCamera } from 'react-native-camera-hooks'
 // import { RNCamera } from 'react-native-camera';
 // import RNFS from 'react-native-fs'
@@ -30,7 +31,6 @@ const Login = () => {
   const navigation = useNavigation();
 
   const reducer = useSelector((state) => state)
-  const { userData, snackBar } = reducer;
 
   const [passwordShow, setPasswordShow] = useState(true);
   const [loginData, setLoginData] = useState({
@@ -62,33 +62,21 @@ const Login = () => {
   const handleLogin = async () => {
 
     if (loginData?.username === '' || loginData?.password === "") {
-      dispatch({
-        type: reduxHelper.UPDATE_SNACKBAR,
-        payload: {
-          visible: true,
-          message: 'userName or password should not be empty'
-        }
-      })
+      const text = 'Enter user name and password'
+      const bgColor = COLORS?.warning
+      snackBar(text, bgColor)
       return
     }
     if (loginData?.username.trim().length === 0 || loginData?.password.trim().length === 0) {
-      dispatch({
-        type: reduxHelper.UPDATE_SNACKBAR,
-        payload: {
-          visible: true,
-          message: 'Empty space is not allowed'
-        }
-      })
+      const text = 'Empty space is not allowed'
+      const bgColor = COLORS?.warning
+      snackBar(text, bgColor)
       return
     }
     if (data[0]?.username !== loginData?.username || data[0].password !== loginData?.password) {
-      dispatch({
-        type: reduxHelper.UPDATE_SNACKBAR,
-        payload: {
-          visible: true,
-          message: 'You are not an User'
-        }
-      })
+      const text = 'You are not an User'
+      const bgColor = COLORS?.danger
+      snackBar(text, bgColor)
       return
     }
     dispatch({
