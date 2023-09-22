@@ -13,6 +13,7 @@ import Notification from '../screen/Notification/Notification';
 import Account from '../screen/Account/Account';
 import ForgotPassword from '../screen/Auth/ForgotPassword';
 import OTPVerification from '../screen/Auth/OTPVerification';
+import ChangePassword from '../screen/Auth/ChangePassword';
 
 const Stack = createStackNavigator()
 
@@ -26,6 +27,7 @@ function AuthNav() {
             <Stack.Screen name='Login' component={Login} />
             <Stack.Screen name='Forgot' component={ForgotPassword} />
             <Stack.Screen name='OTP' component={OTPVerification} />
+            <Stack.Screen name='ChangePassword' component={ChangePassword} />
             <Stack.Screen name='Dashboard' component={HomeNav} />
         </Stack.Navigator>
     )

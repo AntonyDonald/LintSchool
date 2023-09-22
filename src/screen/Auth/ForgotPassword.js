@@ -26,7 +26,7 @@ const ForgotPassword = () => {
           <Header transparent leftIcon={'back'} />
           <LinearGradient
             style={{ flex: 1 }}
-            colors={['#FFCD90', '#FE9063']}>
+            colors={[COLORS.linear1, COLORS.linear2]}>
             <View style={{
               flex: 1,
               alignItems: 'center',
@@ -155,7 +155,7 @@ const ForgotPassword = () => {
                   <TouchableOpacity
                     onPress={() => navigation?.goBack()}
                     style={{
-                      backgroundColor: '#505050',
+                      backgroundColor: COLORS.backArrow,
                       width: 50,
                       borderRadius: SIZES.radius,
                       alignItems: 'center',

@@ -7,7 +7,8 @@ const initialState = {
     userData: null,
     snackBar: {
         visible: false,
-        message: ''
+        message: '',
+        bgColor : ''
     },
     navigation: null,
 }

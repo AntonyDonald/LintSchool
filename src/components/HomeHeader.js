@@ -10,12 +10,6 @@ const HomeHeader = (props) => {
 
     const { colors } = useTheme();
 
-    const openDrawer = () => {
-        if (props.navigation) {
-            console.log('yes');
-            props.navigation.openDrawer();
-        }
-    };
     return (
         <>
             <View style={{
@@ -26,7 +20,7 @@ const HomeHeader = (props) => {
                 paddingHorizontal: 5,
             }}>
                 <TouchableOpacity
-                    onPress={openDrawer}
+                    onPress={() => props.navigation.openDrawer()}
                     style={{
                         height: 50,
                         width: 50,

@@ -58,6 +58,7 @@ const Login = () => {
     }))
   }
 
+
   const handleLogin = async () => {
 
     if (loginData?.username === '' || loginData?.password === "") {
@@ -109,7 +110,7 @@ const Login = () => {
           <Header transparent leftIcon={'back'} />
           <LinearGradient
             style={{ flex: 1 }}
-            colors={['#FFCD90', '#FE9063']}>
+            colors={[COLORS.linear1, COLORS.linear2]}>
             <View style={{
               flex: 1,
               alignItems: 'center',
@@ -187,7 +188,7 @@ const Login = () => {
                 <View style={{ alignItems: 'flex-end', marginBottom: 15 }}>
                   <TouchableOpacity
                     style={{ marginLeft: 5 }}
-                    onPress={() => navigation.navigate('Forgot') }
+                    onPress={() => navigation.navigate('Forgot')}
                   >
                     <Text style={[FONTS.fontLg, { color: COLORS.primary, textDecorationLine: 'underline' }]}>Forgot Password</Text>
                   </TouchableOpacity>
@@ -217,7 +218,7 @@ const styles = StyleSheet.create({
     borderRadius: SIZES.radius,
   },
   inputIcon: {
-    backgroundColor: COLORS.yellow,
+    backgroundColor: COLORS.primary,
     height: 40,
     width: 40,
     borderRadius: 10,
@@ -236,5 +237,6 @@ const styles = StyleSheet.create({
     right: 0,
     zIndex: 1,
     top: 0,
+
   }
 })

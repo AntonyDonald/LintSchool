@@ -67,7 +67,7 @@ const OnBoarding = () => {
             <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
                 <LinearGradient
                     style={{ flex: 1 }}
-                    colors={['#FFCD90', '#FE9063']}>
+                    colors={[COLORS.linear1, COLORS.linear2]}>
                     <View style={{
                         flex: 1,
                         alignItems: 'center',
