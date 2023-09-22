@@ -1,10 +1,10 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React, { Children } from 'react'
-import { statusbarHeight } from '../config/Dimension'
+import { statusbarHeight } from '../../config/Dimension'
 
 export default function Root({ children }) {
     return (
-        <SafeAreaView style={[styles.container, {}]}>
+        <SafeAreaView style={[styles.container]}>
             {children}
         </SafeAreaView>
     )
@@ -12,7 +12,5 @@ export default function Root({ children }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: statusbarHeight,
-        backgroundColor: '#fff'
     }
 })

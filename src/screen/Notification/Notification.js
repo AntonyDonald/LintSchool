@@ -1,8 +1,8 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Root from '../../components/Root'
 import Header from '../../components/Header'
 import { memo } from 'react'
+import Root from '../../components/CustomComponent/Root'
 
 const Notification = () => {
     return (

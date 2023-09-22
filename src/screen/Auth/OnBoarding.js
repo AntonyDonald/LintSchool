@@ -15,10 +15,10 @@ import { } from 'react-native-paper'
 import { useRef } from 'react'
 import { COLORS, FONTS, IMAGES } from '../../components/theme'
 import LinearGradient from 'react-native-linear-gradient'
-import CustomButton from '../../components/CustomButton'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 import { useCallback } from 'react'
+import CustomButton from '../../components/CustomComponent/CustomButton'
 
 const OnBoarding = () => {
 

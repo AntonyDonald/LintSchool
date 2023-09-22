@@ -1,7 +1,7 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Root from '../../components/Root'
 import { memo } from 'react'
+import Root from '../../components/CustomComponent/Root'
 
 const Profile = () => {
     return (

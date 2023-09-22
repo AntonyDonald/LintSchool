@@ -6,9 +6,9 @@ import FastImage from 'react-native-fast-image'
 import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/theme'
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
 import { SvgXml } from 'react-native-svg'
-import CustomButton from '../../components/CustomButton'
 import { useNavigation, useTheme } from '@react-navigation/native'
 import { useState } from 'react'
+import CustomButton from '../../components/CustomComponent/CustomButton'
 
 const ChangePassword = () => {
 

@@ -98,7 +98,6 @@ export const SIZES = {
 
 };
 
-
 export const COLORS = {
     primary: "#102693",
     primary2: "#14b987",
@@ -110,7 +109,7 @@ export const COLORS = {
     yellow: "#FFCD90",
     secondary: "#704FFE",
     success: "#54D969",
-    danger: "#ff4a5c",
+    danger: "#fb0000",
     warning: "#ffb02c",
     white: "#fff",
     info: "#4cb1ff",
@@ -140,6 +139,7 @@ export const COLORS = {
     linear2: '#84A9FF',
     backArrow: '#102693'
 }
+
 
 export const FONTS = {
 

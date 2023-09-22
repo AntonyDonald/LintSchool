@@ -8,8 +8,8 @@ import FastImage from 'react-native-fast-image';
 import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/theme';
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { SvgXml } from 'react-native-svg';
-import CustomButton from '../../components/CustomButton';
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet';
+import CustomButton from '../../components/CustomComponent/CustomButton';
 
 const OTPVerification = () => {
 

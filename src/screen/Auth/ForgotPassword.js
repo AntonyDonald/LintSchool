@@ -5,10 +5,10 @@ import LinearGradient from 'react-native-linear-gradient'
 import FastImage from 'react-native-fast-image'
 import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/theme'
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
-import CustomButton from '../../components/CustomButton'
 import { SvgXml } from 'react-native-svg'
 import SelectDropdown from 'react-native-select-dropdown'
 import { useNavigation, useTheme } from '@react-navigation/native'
+import CustomButton from '../../components/CustomComponent/CustomButton'
 
 const ForgotPassword = () => {
 

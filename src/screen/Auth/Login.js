@@ -17,10 +17,10 @@ import { reduxHelper } from '../../redux/ReduxHelper'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, IMAGES, SIZES, FONTS, ICONS } from '../../components/theme'
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
-import CustomButton from '../../components/CustomButton';
 import { SvgXml } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
 import { snackBar } from '../../components/SnackBar'
+import CustomButton from '../../components/CustomComponent/CustomButton'
 // import { useCamera } from 'react-native-camera-hooks'
 // import { RNCamera } from 'react-native-camera';
 // import RNFS from 'react-native-fs'

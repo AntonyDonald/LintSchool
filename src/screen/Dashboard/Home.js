@@ -1,6 +1,5 @@
 import { BackHandler, SafeAreaView, StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import React, { useCallback, useEffect, useState } from 'react'
-import Root from '../../components/Root'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import DeviceInfo from 'react-native-device-info'
 import { screenHeight, screenWidth } from '../../config/Dimension'
@@ -8,6 +7,7 @@ import { GREY } from '../../theme/MainColor'
 import { useDispatch } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
 import HomeHeader from '../../components/HomeHeader'
+import Root from '../../components/CustomComponent/Root'
 
 
 const Home = () => {
