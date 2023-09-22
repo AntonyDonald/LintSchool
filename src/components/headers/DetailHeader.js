@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Platform } from 'react-native';
 import { Text, IconButton,} from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { screenHeight, screenWidth } from '../config/Dimension';
+import { screenHeight, screenWidth } from '../../config/Dimension';
 
 const isIOS = Platform.OS === 'ios'
 

@@ -4,7 +4,7 @@ import { useTheme } from '@react-navigation/native';
 import { Feather } from 'react-native-vector-icons';
 import FastImage from 'react-native-fast-image';
 import { Divider } from 'react-native-paper';
-import { COLORS, IMAGES, FONTS } from './styles/theme';
+import { COLORS, IMAGES, FONTS } from '../styles/theme';
 
 const HomeHeader = (props) => {
 

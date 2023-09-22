@@ -1,6 +1,6 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import Header from '../../components/Header'
+import Header from '../../components/headers/Header'
 import LinearGradient from 'react-native-linear-gradient'
 import FastImage from 'react-native-fast-image'
 import { COLORS, FONTS, ICONS, IMAGES, SIZES } from '../../components/styles/theme'

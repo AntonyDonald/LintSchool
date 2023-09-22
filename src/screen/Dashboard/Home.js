@@ -6,7 +6,7 @@ import { screenHeight, screenWidth } from '../../config/Dimension'
 import { GREY } from '../../theme/MainColor'
 import { useDispatch } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
-import HomeHeader from '../../components/HomeHeader'
+import HomeHeader from '../../components/headers/HomeHeader'
 import Root from '../../components/CustomComponent/Root'
 
 

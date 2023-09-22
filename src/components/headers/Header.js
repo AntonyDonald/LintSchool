@@ -2,8 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { Text, TouchableOpacity, View } from "react-native";
 import { useTheme } from "react-native-paper";
 import { MaterialIcons, Feather } from "react-native-vector-icons";
-import { screenHeight } from "../config/Dimension";
-import { COLORS, FONTS, SIZES } from "./styles/theme";
+import { screenHeight } from "../../config/Dimension";
+import { COLORS, FONTS, SIZES } from "../styles/theme";
 
 const Header = (props) => {
 

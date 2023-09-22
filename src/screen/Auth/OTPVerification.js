@@ -1,6 +1,6 @@
 import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import Header from '../../components/Header'
+import Header from '../../components/headers/Header'
 import { useState } from 'react';
 import { useNavigation, useTheme } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';

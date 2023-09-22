@@ -9,8 +9,8 @@ import {
 } from 'react-native'
 import React, { memo, useState } from 'react'
 import FastImage from 'react-native-fast-image'
-import Header from '../../components/Header'
-import DetailHeader from '../../components/DetailHeader'
+import Header from '../../components/headers/Header'
+import DetailHeader from '../../components/headers/DetailHeader'
 import { useLogin } from '../../hooks/useLogin';
 import { useDispatch, useSelector } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
