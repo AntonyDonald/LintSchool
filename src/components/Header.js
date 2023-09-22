@@ -36,7 +36,7 @@ const Header = (props) => {
                 }]}>
                     {props.sideMenu &&
                         <TouchableOpacity
-                            onPress={() => { navigation.openDrawer(), console.log('pessed') }}
+                            // onPress={() => { navigation.openDrawer(), console.log('pessed') }}
                             style={{
                                 height: 48,
                                 width: 48,

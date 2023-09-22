@@ -1,16 +1,12 @@
-import { FlatList, SafeAreaView, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { BackHandler, SafeAreaView, StyleSheet, Text, ToastAndroid, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { usePageJson } from '../../hooks/appDataHooks/usePageJson'
 import Root from '../../components/Root'
-import { AllComponents } from '../../config/AllComponents'
-import { Button, Text, TouchableRipple } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native'
 import DeviceInfo from 'react-native-device-info'
 import { screenHeight, screenWidth } from '../../config/Dimension'
 import { GREY } from '../../theme/MainColor'
 import { useDispatch } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
-import Header from '../../components/Header'
 import HomeHeader from '../../components/HomeHeader'
 
 
@@ -18,18 +14,27 @@ const Home = () => {
 
     const navigation = useNavigation();
     const dispatch = useDispatch()
+    const [batteryPercentage, setBatteryPercentage] = useState(0);
+    const [canExist, setExist] = useState(false);
 
-    // const [jsonData, setJsonData] = useState({})
+    useFocusEffect(
+        useCallback(() => {
+            const backAction = () => {
+                if (canExist) {
+                    BackHandler.exitApp()
+                }
+                else {
+                    setExist(true)
+                    ToastAndroid.show("Press again to close the app!", 3000)
+                }
+                return true;
+            };
 
-    // const getPageJson = async () => {
-    //     const result = await usePageJson('home')
-    //     setJsonData(result)
-    //     console.log('resu', result);
-    // }
-    // useEffect(() => {
-    //     getPageJson()
-    // }, [])
-    const [batteryPercentage, setBatteryPercentage] = useState(0)
+            const subscription = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+            return () => subscription.remove();
+        }, [canExist])
+    );
     useEffect(() => {
         test()
     }, [])
@@ -47,42 +52,16 @@ const Home = () => {
     return (
         <Root>
             <SafeAreaView style={{ flex: 1 }}>
-                <HomeHeader title={'Home'} />
+                <HomeHeader title={'Home'} notification={'Notification'} navigation={navigation} />
                 <View style={{
                     flex: 1,
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
                     <Text>Home</Text>
+                    <Text>{Math.round(batteryPercentage)}</Text>
                 </View>
             </SafeAreaView>
-            {/* <View style={styles.container}>
-                <View style={styles.cameraButton}>
-                    <TouchableRipple
-                        style={[StyleSheet.absoluteFill, { zIndex: 999 }]}
-                        onPress={() => navigation.navigate('openCamera')}
-                    >
-                        <View />
-                    </TouchableRipple>
-                    <Text variant='bodyLarge'>Open Camera</Text>
-                </View>
-            </View> */}
-            {/* <View>
-                <TouchableOpacity>
-                    <Button onPress={handleLogout}>Logout</Button>
-
-                </TouchableOpacity>
-            </View> */}
-            {/* <FlatList
-                data={jsonData?.components}
-                renderItem={({ item, index }) => {
-                    console.log('ite,', item);
-                    return AllComponents[item?.key]
-                }}
-            /> */}
-
-
-            {/* <Text>{batteryPercentage}%</Text> */}
         </Root>
 
     )

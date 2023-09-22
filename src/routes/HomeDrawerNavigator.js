@@ -7,12 +7,6 @@ const Drawer = createDrawerNavigator();
 
 export default function HomeDrawerNavigator() {
     return (
-        <SafeAreaView
-            style={{
-                flex: 1,
-                // backgroundColor: colors.cardBg,
-            }}
-        >
             <Drawer.Navigator
                 drawerContent={() => <HomeDrawerMenu />}
                 screenOptions={{
@@ -24,7 +18,6 @@ export default function HomeDrawerNavigator() {
                     name="HomeBottomNav"
                     component={HomeBottomNav}
                 />
-            </Drawer.Navigator>
-        </SafeAreaView>
+            </Drawer.Navigator>   
     )
 }

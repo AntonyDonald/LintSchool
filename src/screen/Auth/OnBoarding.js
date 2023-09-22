@@ -4,7 +4,9 @@ import {
     ScrollView,
     StyleSheet,
     View,
-    Text
+    Text,
+    BackHandler,
+    ToastAndroid
 } from 'react-native'
 import React, { Fragment, } from 'react'
 import FastImage from 'react-native-fast-image'
@@ -14,11 +16,34 @@ import { useRef } from 'react'
 import { COLORS, FONTS, IMAGES } from '../../components/theme'
 import LinearGradient from 'react-native-linear-gradient'
 import CustomButton from '../../components/CustomButton'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { useState } from 'react'
+import { useCallback } from 'react'
 
 const OnBoarding = () => {
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
+    const [canExist, setExist] = useState(false);
+
+    useFocusEffect(
+        useCallback(() => {
+            const backAction = () => {
+                if (canExist) {
+                    BackHandler.exitApp()
+                    setExist(false)
+                }
+                else {
+                    setExist(true)
+                    ToastAndroid.show("Press again to close the app!", 3000)
+                }
+                return true;
+            };
+
+            const subscription = BackHandler.addEventListener('hardwareBackPress', backAction);
+
+            return () => subscription.remove();
+        }, [canExist])
+    );
 
     const DATA = [
         {
@@ -85,8 +110,8 @@ const OnBoarding = () => {
                                 {DATA.map((data, index) => (
 
                                     <View style={[styles.slideItem]} key={index}>
-                                        <Text style={[FONTS.h2, { textAlign: 'center', color: COLORS.title , fontWeight :'800' }]}>{data.title}</Text>
-                                        <Text style={[FONTS.font, { textAlign: 'center', color: COLORS.text , fontWeight :'600'}]}>{data.desc}</Text>
+                                        <Text style={[FONTS.h2, { textAlign: 'center', color: COLORS.title, fontWeight: '800' }]}>{data.title}</Text>
+                                        <Text style={[FONTS.font, { textAlign: 'center', color: COLORS.text, fontWeight: '600' }]}>{data.desc}</Text>
                                     </View>
 
                                 ))}
@@ -100,10 +125,7 @@ const OnBoarding = () => {
                         </View>
                         <View style={styles.container}>
                             <View style={{ paddingBottom: 15 }}>
-                                <CustomButton title={'SIGN IN'} onPress={() => navigation.navigate('Login')} />
-                            </View>
-                            <View style={{ alignItems: 'center', padding: 12 }}>
-                                <Text style={[FONTS.font, { color: COLORS.text }]}>Forgot your account?</Text>
+                                <CustomButton title={'Get Start'} onPress={() => navigation.navigate('Login')} />
                             </View>
                         </View>
                     </View>

@@ -10,18 +10,23 @@ const HomeHeader = (props) => {
 
     const { colors } = useTheme();
 
-
+    const openDrawer = () => {
+        if (props.navigation) {
+            console.log('yes');
+            props.navigation.openDrawer();
+        }
+    };
     return (
         <>
             <View style={{
                 height: 50,
-                backgroundColor: colors.cardBg,
+                backgroundColor: colors.background,
                 flexDirection: 'row',
                 alignItems: 'center',
                 paddingHorizontal: 5,
             }}>
                 <TouchableOpacity
-                    // onPress={() => props.drawer && props.drawer()}
+                    onPress={openDrawer}
                     style={{
                         height: 50,
                         width: 50,
@@ -39,6 +44,7 @@ const HomeHeader = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}
+                    onPress={() => props?.notification && props?.navigation.navigate(props?.notification)}
                 >
                     <View
                         style={{

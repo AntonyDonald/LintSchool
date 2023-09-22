@@ -19,6 +19,7 @@ import { COLORS, IMAGES, SIZES, FONTS, ICONS } from '../../components/theme'
 import { GlobalStyleSheet } from '../../components/GlobalStyleSheet'
 import CustomButton from '../../components/CustomButton';
 import { SvgXml } from 'react-native-svg'
+import { useNavigation } from '@react-navigation/native'
 // import { useCamera } from 'react-native-camera-hooks'
 // import { RNCamera } from 'react-native-camera';
 // import RNFS from 'react-native-fs'
@@ -26,6 +27,7 @@ import { SvgXml } from 'react-native-svg'
 const Login = () => {
 
   const dispatch = useDispatch();
+  const navigation = useNavigation();
 
   const reducer = useSelector((state) => state)
   const { userData, snackBar } = reducer;
@@ -185,6 +187,7 @@ const Login = () => {
                 <View style={{ alignItems: 'flex-end', marginBottom: 15 }}>
                   <TouchableOpacity
                     style={{ marginLeft: 5 }}
+                    onPress={() => navigation.navigate('Forgot') }
                   >
                     <Text style={[FONTS.fontLg, { color: COLORS.primary, textDecorationLine: 'underline' }]}>Forgot Password</Text>
                   </TouchableOpacity>
@@ -203,7 +206,7 @@ const Login = () => {
   )
 }
 
-export default memo(Login)
+export default Login
 
 const styles = StyleSheet.create({
   inputStyle: {
