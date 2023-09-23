@@ -8,7 +8,7 @@ import {
     BackHandler,
     ToastAndroid
 } from 'react-native'
-import React, { Fragment, } from 'react'
+import React, { Fragment, useEffect, } from 'react'
 import FastImage from 'react-native-fast-image'
 import { screenHeight, screenWidth } from '../../config/Dimension'
 import { } from 'react-native-paper'
@@ -19,6 +19,7 @@ import { useFocusEffect, useNavigation } from '@react-navigation/native'
 import { useState } from 'react'
 import { useCallback } from 'react'
 import CustomButton from '../../components/CustomComponent/CustomButton'
+import DeviceInfo from 'react-native-device-info'
 
 const OnBoarding = () => {
 
@@ -44,7 +45,6 @@ const OnBoarding = () => {
             return () => subscription.remove();
         }, [canExist])
     );
-
     const DATA = [
         {
             title: 'Let’s get started',

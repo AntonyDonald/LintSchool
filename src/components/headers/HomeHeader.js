@@ -5,13 +5,14 @@ import { Feather } from 'react-native-vector-icons';
 import FastImage from 'react-native-fast-image';
 import { Divider } from 'react-native-paper';
 import { COLORS, IMAGES, FONTS } from '../styles/theme';
+import { statusbarHeight } from '../../config/Dimension';
 
 const HomeHeader = (props) => {
 
     const { colors } = useTheme();
 
     return (
-        <>
+        <View style={{ paddingTop: statusbarHeight }}>
             <View style={{
                 height: 50,
                 backgroundColor: colors.background,
@@ -92,7 +93,7 @@ const HomeHeader = (props) => {
                 </TouchableOpacity>
             </View>
             <Divider />
-        </>
+        </View>
     );
 };
 

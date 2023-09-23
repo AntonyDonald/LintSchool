@@ -7,7 +7,6 @@ import Root from '../../components/CustomComponent/Root'
 const Notification = () => {
     return (
         <Root>
-            <SafeAreaView style={{ flex: 1 }}>
                 <Header leftIcon='back' title='Notification' />
                 <View style={{
                     flex: 1,
@@ -16,7 +15,6 @@ const Notification = () => {
                 }}>
                     <Text>Notification</Text>
                 </View>
-            </SafeAreaView>
         </Root>
     )
 }

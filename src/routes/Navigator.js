@@ -3,8 +3,6 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import linking from './linking';
-import HomeBottomNav from './HomeBottomNav';
-import Camera from '../screen/camera/Camera';
 import { useSelector } from 'react-redux';
 import OnBoarding from '../screen/Auth/OnBoarding';
 import HomeDrawerNavigator from './HomeDrawerNavigator';
@@ -14,6 +12,7 @@ import Account from '../screen/Account/Account';
 import ForgotPassword from '../screen/Auth/ForgotPassword';
 import OTPVerification from '../screen/Auth/OTPVerification';
 import ChangePassword from '../screen/Auth/ChangePassword';
+import OpenCamera from '../screen/camera/Camera'
 
 const Stack = createStackNavigator()
 
@@ -36,7 +35,7 @@ function HomeNav() {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false, cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS }}>
             <Stack.Screen name='Home' component={HomeDrawerNavigator} />
-            <Stack.Screen name='openCamera' component={Camera} />
+            <Stack.Screen name='openCamera' component={OpenCamera} />
             <Stack.Screen name='Notification' component={Notification} />
             <Stack.Screen name='Account' component={Account} />
 

@@ -9,7 +9,7 @@ import Profile from '../screen/Dashboard/Profile';
 import Chat from '../screen/Dashboard/Chat';
 import Likes from '../screen/Dashboard/Likes';
 import FastImage from 'react-native-fast-image';
-import { COLORS, ICONS, IMAGES, SIZES  } from '../components/styles/theme';
+import { COLORS, ICONS, IMAGES, SIZES } from '../components/styles/theme';
 
 const Tab = createBottomTabNavigator();
 
@@ -24,7 +24,7 @@ const CustomTabBarButton = () => {
                 accessible={true}
                 accessibilityLabel="Post"
                 accessibilityHint="create the post"
-                // onPress={() => navigation.navigate('CreatePost')}
+                onPress={() => navigation.navigate('openCamera')}
                 style={{
                     height: 55,
                     width: 55,
