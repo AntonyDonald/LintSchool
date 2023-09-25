@@ -1,13 +1,9 @@
 import { Image, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react';
-// import { useCamera } from 'react-native-camera-hooks'
-// import { RNCamera } from 'react-native-camera';
 import RNFS from 'react-native-fs'
 import { useNavigation } from '@react-navigation/native';
-// import { Button, TouchableRipple } from 'react-native-paper';
 import { MaterialCommunityIcons, Ionicons } from 'react-native-vector-icons'
 import { screenHeight, screenWidth } from '../../config/Dimension';
-// import Root from '../../components/CustomComponent/Root';
 import { Camera, useCameraDevices } from 'react-native-vision-camera';
 import axios from 'axios';
 import { useRef } from 'react';
@@ -69,7 +65,8 @@ const OpenCamera = () => {
             //     "Content-Type": "application/json"
             // },
             headers: {
-                'content-type': 'multipart/form-data'
+                'content-type': 'multipart/form-data',
+                "Authorization" : 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1NDc2MjMwLCJpYXQiOjE2OTU0NzU5MzAsImp0aSI6IjE5MjRlN2I0MjRhYzRmNGE5MTk2YmJjODhlZTU0NjU0IiwidXNlcl9pZCI6M30.-c0Nl5zJ9XfKcSZQRY1xj1juW7RNKFBeqINOTKTIJ64'
             },
             data: form_data
         })
@@ -80,7 +77,7 @@ const OpenCamera = () => {
     }
 
     const devices = useCameraDevices();
-    const device = cameraPosition ? devices.back : devices?.front;
+    const device = !cameraPosition ? devices.back : devices?.front;
     useEffect(() => {
         requestPermission()
     }, [])

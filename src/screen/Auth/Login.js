@@ -5,25 +5,23 @@ import {
   TouchableOpacity,
   View,
   Text,
-  TextInput
+  TextInput,
+  PermissionsAndroid
 } from 'react-native'
-import React, { memo, useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import FastImage from 'react-native-fast-image'
 import Header from '../../components/headers/Header'
-import DetailHeader from '../../components/headers/DetailHeader'
 import { useLogin } from '../../hooks/useLogin';
 import { useDispatch, useSelector } from 'react-redux'
-import { reduxHelper } from '../../redux/ReduxHelper'
 import LinearGradient from 'react-native-linear-gradient'
 import { COLORS, IMAGES, SIZES, FONTS, ICONS } from '../../components/styles/theme'
 import { GlobalStyleSheet } from '../../components/styles/GlobalStyleSheet'
 import { SvgXml } from 'react-native-svg'
 import { useNavigation } from '@react-navigation/native'
-import { snackBar } from '../../components/CustomComponent/SnackBar'
 import CustomButton from '../../components/CustomComponent/CustomButton'
-// import { useCamera } from 'react-native-camera-hooks'
-// import { RNCamera } from 'react-native-camera';
-// import RNFS from 'react-native-fs'
+import DeviceInfo from 'react-native-device-info'
+import Geolocation from 'react-native-geolocation-service';
+import { snackBar } from '../../components/CustomComponent/SnackBar';
 
 const Login = () => {
 
@@ -35,14 +33,33 @@ const Login = () => {
   const [passwordShow, setPasswordShow] = useState(true);
   const [loginData, setLoginData] = useState({
     username: "",
-    password: ''
+    password: '',
+
   })
+  const [batteryPercentage, setBatteryPercentage] = useState(0);
+  const [deviceId, setDeviceId] = useState('');
+  const [model, setModel] = useState('');
 
   const handndleShowPassword = () => {
     setPasswordShow(!passwordShow);
   }
+  useEffect(() => {
+    MobileDetails()
+    requestLocationPermission()
+  }, [])
 
+  const MobileDetails = async () => {
+    const getBattery = await DeviceInfo.getBatteryLevel()
+    const percentage = getBattery * 100
+    setBatteryPercentage(percentage)
 
+    const id = await DeviceInfo.getDeviceId()
+    setDeviceId(id)
+
+    const model = await DeviceInfo.getModel()
+    setModel(model)
+
+  }
 
   const data = [
     {
@@ -58,37 +75,86 @@ const Login = () => {
     }))
   }
 
+  const location = async () => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        console.log('position', position);
+        loginData['latitude'] = String(position?.coords?.latitude)
+        loginData['longitude'] = String(position?.coords?.longitude)
+      },
+      (error) => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  }
+
+  const requestLocationPermission = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        {
+          title: 'Location Permission',
+          message:
+            'School App needs access to your Location ',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        location()
+      } else {
+        console.log('location permission denied');
+      }
+    } catch (err) {
+      console.log('location permission Error', err);
+    }
+  };
 
   const handleLogin = async () => {
 
-    if (loginData?.username === '' || loginData?.password === "") {
-      const text = 'Enter user name and password'
-      const bgColor = COLORS?.warning
-      snackBar(text, bgColor)
-      return
-    }
-    if (loginData?.username.trim().length === 0 || loginData?.password.trim().length === 0) {
-      const text = 'Empty space is not allowed'
-      const bgColor = COLORS?.warning
-      snackBar(text, bgColor)
-      return
-    }
-    if (data[0]?.username !== loginData?.username || data[0].password !== loginData?.password) {
-      const text = 'You are not an User'
+    // if (loginData?.username === '' || loginData?.password === "") {
+    //   const text = 'Enter user name and password'
+    //   const bgColor = COLORS?.warning
+    //   snackBar(text, bgColor)
+    //   return
+    // }
+    // if (loginData?.username.trim().length === 0 || loginData?.password.trim().length === 0) {
+    //   const text = 'Empty space is not allowed'
+    //   const bgColor = COLORS?.warning
+    //   snackBar(text, bgColor)
+    //   return
+    // }
+    // if (data[0]?.username !== loginData?.username || data[0].password !== loginData?.password) {
+    //   const text = 'You are not an User'
+    //   const bgColor = COLORS?.danger
+    //   snackBar(text, bgColor)
+    //   return
+    // }
+
+    loginData['battery_percentage'] = String(batteryPercentage)
+    loginData['device_id'] = String(deviceId)
+    loginData['device_model'] = String(model)
+    const result = await useLogin(loginData)
+    console.log('result', result);
+    if (result?.success == 'False') {
       const bgColor = COLORS?.danger
-      snackBar(text, bgColor)
+      snackBar(result?.message, bgColor)
       return
     }
-    dispatch({
-      type: reduxHelper.UPDATE_USER_DATA,
-      payload: 'Success'
-    })
+    if (result?.success == true) {
+      const bgColor = COLORS?.success
+      snackBar(result?.message, bgColor);
+      
+    }
+    navigation?.navigate('Dashboard')
+
     setLoginData({
       username: "",
       password: ""
     })
-    // const result = await useLogin(loginData)
-    // console.log('result', result?.data);
   }
 
   return (
