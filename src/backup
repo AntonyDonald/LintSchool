@@ -1,0 +1,50 @@
+ const MobileDetails = async () => {
+    const getBattery = await DeviceInfo.getBatteryLevel()
+    const percentage = getBattery * 100
+    setBatteryPercentage(percentage)
+
+    const id = await DeviceInfo.getDeviceId()
+    setDeviceId(id)
+
+    const model = await DeviceInfo.getModel()
+    setModel(model)
+
+  }
+
+  const location = async () => {
+    Geolocation.getCurrentPosition(
+      (position) => {
+        console.log('position', position);
+        loginData['latitude'] = String(position?.coords?.latitude)
+        loginData['longitude'] = String(position?.coords?.longitude)
+      },
+      (error) => {
+        // See error code charts below.
+        console.log(error.code, error.message);
+      },
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
+    );
+  }
+
+  // const requestLocationPermission = async () => {
+  //   try {
+  //     const granted = await PermissionsAndroid.request(
+  //       PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+  //       {
+  //         title: 'Location Permission',
+  //         message:
+  //           'School App needs access to your Location ',
+  //         buttonNeutral: 'Ask Me Later',
+  //         buttonNegative: 'Cancel',
+  //         buttonPositive: 'OK',
+  //       },
+  //     );
+  //     if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+  //       location()
+  //     } else {
+  //       console.log('location permission denied');
+  //     }
+  //   } catch (err) {
+  //     console.log('location permission Error', err);
+  //   }
+  // };

@@ -7,14 +7,21 @@ import { useDispatch } from 'react-redux'
 import { reduxHelper } from '../../redux/ReduxHelper'
 import HomeHeader from '../../components/headers/HomeHeader'
 import Root from '../../components/CustomComponent/Root';
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { TOKEN } from '../../config/Keys'
 
 
 const Home = () => {
 
     const navigation = useNavigation();
     const dispatch = useDispatch()
-   
+
     const [canExist, setExist] = useState(false);
+
+    useEffect(async () => {
+        const check = await AsyncStorage.getItem(TOKEN)
+        console.log('ckeck', check);
+    }, [])
 
     useFocusEffect(
         useCallback(() => {
@@ -56,7 +63,7 @@ const Home = () => {
     //         console.warn(err);
     //     }
     // };
-   
+
 
     // const location = async () => {
     //     Geolocation.getCurrentPosition(

@@ -6,7 +6,8 @@ import {
   View,
   Text,
   TextInput,
-  PermissionsAndroid
+  PermissionsAndroid,
+  Alert
 } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import FastImage from 'react-native-fast-image'
@@ -22,6 +23,9 @@ import CustomButton from '../../components/CustomComponent/CustomButton'
 import DeviceInfo from 'react-native-device-info'
 import Geolocation from 'react-native-geolocation-service';
 import { snackBar } from '../../components/CustomComponent/SnackBar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { REFRESH_TOKEN, TOKEN } from '../../config/Keys';
+import { LocationPermission } from '../../components/permissions/LocationPermission';
 
 const Login = () => {
 
@@ -43,31 +47,7 @@ const Login = () => {
   const handndleShowPassword = () => {
     setPasswordShow(!passwordShow);
   }
-  useEffect(() => {
-    MobileDetails()
-    requestLocationPermission()
-  }, [])
 
-  const MobileDetails = async () => {
-    const getBattery = await DeviceInfo.getBatteryLevel()
-    const percentage = getBattery * 100
-    setBatteryPercentage(percentage)
-
-    const id = await DeviceInfo.getDeviceId()
-    setDeviceId(id)
-
-    const model = await DeviceInfo.getModel()
-    setModel(model)
-
-  }
-
-  const data = [
-    {
-      "id": 1,
-      "username": "admin",
-      "password": "admin"
-    }
-  ]
   const onchangeValue = (text, label) => {
     setLoginData((oldData) => ({
       ...oldData,
@@ -75,81 +55,42 @@ const Login = () => {
     }))
   }
 
-  const location = async () => {
-    Geolocation.getCurrentPosition(
-      (position) => {
-        console.log('position', position);
-        loginData['latitude'] = String(position?.coords?.latitude)
-        loginData['longitude'] = String(position?.coords?.longitude)
-      },
-      (error) => {
-        // See error code charts below.
-        console.log(error.code, error.message);
-      },
-      { enableHighAccuracy: true, timeout: 15000, maximumAge: 10000 }
-    );
-  }
-
-  const requestLocationPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
-        {
-          title: 'Location Permission',
-          message:
-            'School App needs access to your Location ',
-          buttonNeutral: 'Ask Me Later',
-          buttonNegative: 'Cancel',
-          buttonPositive: 'OK',
-        },
-      );
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        location()
-      } else {
-        console.log('location permission denied');
-      }
-    } catch (err) {
-      console.log('location permission Error', err);
-    }
-  };
 
   const handleLogin = async () => {
+    // loginData['battery_percentage'] = String(batteryPercentage)
+    // loginData['device_id'] = String(deviceId)
+    // loginData['device_model'] = String(model)
+    loginData['logged_by'] = 2
 
-    // if (loginData?.username === '' || loginData?.password === "") {
-    //   const text = 'Enter user name and password'
-    //   const bgColor = COLORS?.warning
-    //   snackBar(text, bgColor)
-    //   return
-    // }
-    // if (loginData?.username.trim().length === 0 || loginData?.password.trim().length === 0) {
-    //   const text = 'Empty space is not allowed'
-    //   const bgColor = COLORS?.warning
-    //   snackBar(text, bgColor)
-    //   return
-    // }
-    // if (data[0]?.username !== loginData?.username || data[0].password !== loginData?.password) {
-    //   const text = 'You are not an User'
-    //   const bgColor = COLORS?.danger
-    //   snackBar(text, bgColor)
-    //   return
-    // }
 
-    loginData['battery_percentage'] = String(batteryPercentage)
-    loginData['device_id'] = String(deviceId)
-    loginData['device_model'] = String(model)
-    const result = await useLogin(loginData)
-    console.log('result', result);
-    if (result?.success == 'False') {
-      const bgColor = COLORS?.danger
-      snackBar(result?.message, bgColor)
+    if (loginData?.username === '' || loginData?.password === "") {
+      const text = 'Enter user name and password'
+      const bgColor = COLORS?.warning
+      snackBar(text, bgColor)
       return
     }
-    if (result?.success == true) {
-      const bgColor = COLORS?.success
-      snackBar(result?.message, bgColor);
-      
+    if (loginData?.username.trim().length === 0 || loginData?.password.trim().length === 0) {
+      const text = 'Empty space is not allowed'
+      const bgColor = COLORS?.warning
+      snackBar(text, bgColor)
+      return
     }
-    navigation?.navigate('Dashboard')
+
+    const result = await useLogin(loginData)
+    console.log('result', result);
+    if (result?.status !== 200) {
+      const bgColor = COLORS?.danger
+      snackBar(result?.data?.message, bgColor)
+      return
+    }
+    if (result?.status === 200) {
+      const bgColor = COLORS?.success
+      snackBar(result?.data?.message, bgColor);
+      AsyncStorage.setItem(TOKEN, result?.token?.access)
+      AsyncStorage.setItem(REFRESH_TOKEN, result?.token?.refresh)
+      navigation?.navigate('Dashboard')
+    }
+
 
     setLoginData({
       username: "",

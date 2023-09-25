@@ -11,12 +11,12 @@ export const useLogin = (data) => new Promise((resolve, reject) => {
         },
         data: data
     })
-        // .then((res) => res.json())
         .then((response) => {
             console.log('respos', response);
-            resolve(response?.data)
+            resolve(response)
         })
         .catch((error) => {
-            resolve(error?.response?.data)
+            console.log('error', error);
+            resolve(error?.response)
         })
 })
